@@ -1,0 +1,4 @@
+artists:
+    type: rest
+    resource: "@AppRestBundle/Controller/BrandController.php"
+    name_prefix: api_

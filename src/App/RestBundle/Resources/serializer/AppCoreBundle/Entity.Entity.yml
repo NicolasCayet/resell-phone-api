@@ -1,0 +1,6 @@
+App\CoreBundle\Entity\Entity:
+    exclusion_policy: ALL
+    properties:
+        id:
+            type: integer
+            expose: true

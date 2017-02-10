@@ -1,0 +1,9 @@
+App\CoreBundle\Entity\Brand:
+    exclusion_policy: ALL
+    properties:
+        id:
+            type: integer
+            expose: true
+        name:
+            type: string
+            expose: true
