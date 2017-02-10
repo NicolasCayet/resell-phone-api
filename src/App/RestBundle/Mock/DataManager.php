@@ -3,6 +3,7 @@
 namespace App\RestBundle\Mock;
 
 use App\RestBundle\Mock\Repository;
+use Symfony\Component\Filesystem\Filesystem;
 
 /**
  * Class DataManager
@@ -43,5 +44,11 @@ class DataManager
 
             return $this->repositories[$className];
         }
+    }
+
+    public function clearAllData()
+    {
+        $fs = new Filesystem();
+        $fs->remove($this->storageRootDir);
     }
 }

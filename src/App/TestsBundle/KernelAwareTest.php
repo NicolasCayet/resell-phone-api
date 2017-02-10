@@ -51,5 +51,6 @@ abstract class KernelAwareTest extends \PHPUnit_Framework_TestCase
      */
     protected function clearStorage()
     {
+        $this->dataManager->clearAllData();
     }
 }
