@@ -18,22 +18,22 @@ Please use the /web/app_dev.php as default index file while it is in development
 
 Config example for an Apache VirtualHost:
 
-  <VirtualHost *>
-    DocumentRoot "/path-to-recommerce_test-project/web"
-    ServerName recommerce_test.local
-
-    <Directory /path-to-recommerce_test-project/web>
-        Options Indexes FollowSymLinks MultiViews
-        AllowOverride None
-        Order allow,deny
-        allow from all
-        <IfModule mod_rewrite.c>
-            RewriteEngine On
-            RewriteCond %{REQUEST_FILENAME} !-f
-            RewriteRule ^(.*)$ /app_dev.php [QSA,L]
-        </IfModule>
-    </Directory>
-  </VirtualHost>
+    <VirtualHost *>
+        DocumentRoot "/path-to-recommerce_test-project/web"
+        ServerName recommerce_test.local
+        
+        <Directory /path-to-recommerce_test-project/web>
+            Options Indexes FollowSymLinks MultiViews
+            AllowOverride None
+            Order allow,deny
+            allow from all
+            <IfModule mod_rewrite.c>
+                RewriteEngine On
+                RewriteCond %{REQUEST_FILENAME} !-f
+                RewriteRule ^(.*)$ /app_dev.php [QSA,L]
+            </IfModule>
+        </Directory>
+    </VirtualHost>
 
 #### Using PHP's built-in Web Server
 
