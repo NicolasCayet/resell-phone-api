@@ -2,7 +2,7 @@
 
 namespace App\StorageBundle\Tests\Repository;
 
-use App\CoreBundle\Tests\KernelAwareTest;
+use App\TestsBundle\KernelAwareTest;
 use App\CoreBundle\Entity\Brand;
 
 class BrandTest extends KernelAwareTest

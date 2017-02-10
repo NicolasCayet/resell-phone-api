@@ -28,6 +28,10 @@ class AppKernel extends Kernel
             $bundles[] = new Sensio\Bundle\GeneratorBundle\SensioGeneratorBundle();
         }
 
+        if ($this->getEnvironment() === 'test') {
+            $bundles[] = new \App\TestsBundle\AppTestsBundle();
+        }
+
         return $bundles;
     }
 
