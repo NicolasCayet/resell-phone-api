@@ -2,6 +2,8 @@
 
 namespace App\CoreBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+
 /**
  * Entity Brand : brands selling phone
  *
@@ -15,9 +17,10 @@ class Brand extends Entity
      */
     protected $name;
 
-    public function __construct()
-    {
-    }
+    /**
+     * @var ArrayCollection
+     */
+    protected $phones;
 
     /**
      * @return string
@@ -33,5 +36,36 @@ class Brand extends Entity
     public function setName($name)
     {
         $this->name = $name;
+    }
+
+    /**
+     * @return ArrayCollection Collection of Phones
+     */
+    public function getPhones()
+    {
+        if (!isset($this->phones)) {
+            return new ArrayCollection();
+        }
+
+        return $this->phones;
+    }
+
+    /**
+     * @return bool Whether phones property has been initialized
+     */
+    public function isPhonesInitialized()
+    {
+        return isset($this->phones);
+    }
+
+    /**
+     * @param ArrayCollection $phones
+     */
+    public function setPhones($phones)
+    {
+        if (is_array($phones)) {
+            $phones = new ArrayCollection($phones);
+        }
+        $this->phones = $phones;
     }
 }

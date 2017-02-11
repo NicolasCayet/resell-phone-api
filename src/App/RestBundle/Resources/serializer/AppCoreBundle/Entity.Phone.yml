@@ -1,0 +1,15 @@
+App\CoreBundle\Entity\Phone:
+    exclusion_policy: ALL
+    properties:
+        id:
+            type: integer
+            expose: true
+        name:
+            type: string
+            expose: true
+        price:
+            type: double
+            expose: true
+        brand:
+            type: App\CoreBundle\Entity\Brand
+            expose: true

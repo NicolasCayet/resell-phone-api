@@ -28,7 +28,7 @@ class BrandControllerTest extends RestTest
     public function testBrandCrud()
     {
         // Creation
-        $request = $this->jsonClient->request(
+        $this->jsonClient->request(
             'POST',
             '/api/brands.json',
             array(),

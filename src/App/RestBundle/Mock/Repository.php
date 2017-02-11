@@ -100,6 +100,29 @@ class Repository
     }
 
     /**
+     * Find a Brand entity and load phones belonging to it
+     * @todo place this method only in Brand repository
+     * @param $id
+     * @return Brand
+     */
+    public function findWithPhones($id)
+    {
+        $brand = $this->find($id);
+        if (isset($brand)) {
+            $allPhones = $this->dataManager->getRepo(Phone::class)->findAll();
+            $phones = new ArrayCollection();
+            foreach ($allPhones as $phone) {
+                if ($phone->getBrand()->getId() == $id) {
+                    $phones->add($phone);
+                }
+            }
+            $brand->setPhones($phones);
+        }
+
+        return $brand;
+    }
+
+    /**
      * Write a file corresponding to a single entity
      * @param Entity $entity
      */

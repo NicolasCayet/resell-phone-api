@@ -4,11 +4,9 @@ namespace App\RestBundle\Controller;
 
 use App\CoreBundle\Entity\Brand;
 use App\CoreBundle\Form\BrandType;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
-use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 
 class BrandController extends Controller
 {
@@ -25,15 +23,7 @@ class BrandController extends Controller
      */
     public function getBrandAction($id)
     {
-        $repo = $this->container->get('app.dataManager')->getRepo(Brand::class);
-
-        $entity = $repo->find($id);
-
-        if (!$entity) {
-            throw $this->createNotFoundException();
-        }
-
-        return $entity;
+        return $this->stdGetSingleAction(Brand::class, $id);
     }
 
     /**
@@ -48,11 +38,7 @@ class BrandController extends Controller
      */
     public function getBrandsAction()
     {
-        $repo = $this->container->get('app.dataManager')->getRepo(Brand::class);
-
-        $entities = $repo->findAll();
-
-        return $entities->toArray();
+        return $this->stdGetAllAction(Brand::class);
     }
 
     /**
@@ -68,19 +54,7 @@ class BrandController extends Controller
      */
     public function postBrandAction(Request $request)
     {
-        $repo = $this->container->get('app.dataManager')->getRepo(Brand::class);
-
-        $entity = new Brand();
-
-        $form = $this->prepareFormAndSubmit($request, $entity);
-
-        if ($form->isValid()) {
-            $repo->persist($entity);
-        } else {
-            throw new BadRequestHttpException('Invalid values for entity');
-        }
-
-        return $entity;
+        return $this->stdPostAction(Brand::class, $request, BrandType::class);
     }
 
     /**
@@ -92,27 +66,12 @@ class BrandController extends Controller
      *  output="App\CoreBundle\Entity\Brand"
      * )
      *
+     * @param integer $id
      * @return Brand
      */
     public function putBrandAction(Request $request, $id)
     {
-        $repo = $this->container->get('app.dataManager')->getRepo(Brand::class);
-
-        $entity = $repo->find($id);
-
-        if (!$entity) {
-            throw $this->createNotFoundException();
-        }
-
-        $form = $this->prepareFormAndSubmit($request, $entity);
-
-        if ($form->isValid()) {
-            $repo->persist($entity);
-        } else {
-            throw new BadRequestHttpException('Invalid values for entity');
-        }
-
-        return $entity;
+        return $this->stdPutAction(Brand::class, $request, BrandType::class, $id);
     }
 
     /**
@@ -128,37 +87,6 @@ class BrandController extends Controller
      */
     public function deleteBrandAction($id)
     {
-        $repo = $this->container->get('app.dataManager')->getRepo(Brand::class);
-
-        $entity = $repo->find($id);
-
-        if (!$entity) {
-            throw $this->createNotFoundException();
-        }
-
-        $repo->remove($entity);
-
-        return $entity;
-    }
-
-    /**
-     * @param Request $request
-     * @return \Symfony\Component\Form\Form
-     */
-    protected function prepareFormAndSubmit($request, $object)
-    {
-        if ($request->getContentType() == 'json') {
-            $data = json_decode($request->getContent(), true);
-            $formParams = array('csrf_protection' => false);
-        } else {
-            $data = $request->getContent();
-            $formParams = array();
-        }
-
-        $form = $this->createForm(new BrandType(), $object, $formParams);
-
-        $form->submit($data);
-
-        return $form;
+        return $this->stdDeleteAction(Brand::class, $id);
     }
 }

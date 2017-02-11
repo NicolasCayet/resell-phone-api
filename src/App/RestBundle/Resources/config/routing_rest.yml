@@ -1,4 +1,15 @@
-artists:
+brands:
     type: rest
     resource: "@AppRestBundle/Controller/BrandController.php"
+    name_prefix: api_
+
+phones:
+    type: rest
+    resource: "@AppRestBundle/Controller/PhoneController.php"
+    name_prefix: api_
+
+phonesByBrand:
+    type: rest
+    parent: brands
+    resource: "@AppRestBundle/Controller/PhoneByBrandController.php"
     name_prefix: api_
