@@ -3,6 +3,7 @@
 namespace App\RestBundle\Mock;
 
 use App\CoreBundle\Entity\Entity;
+use App\CoreBundle\Entity\Phone;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Filesystem\Filesystem;
 
@@ -79,7 +80,7 @@ class Repository
                 throw new \Exception('Trying to update non-existing entity');
             }
         } else {
-            $entity->setId(count($this->entities) + 1);
+            $entity->setId($this->findNewId());
         }
 
         $this->entities[$entity->getId()] = $entity;
@@ -154,5 +155,24 @@ class Repository
                 return $entry->getId() == $id;
             }
         );
+    }
+
+    /**
+     * Returns an ID for a new entity, based on existing IDs for this type of entity
+     * @return integer
+     */
+    private function findNewId()
+    {
+        $id = 0;
+        if ($this->fs->exists($this->rootDir)) {
+            $filenames = scandir($this->rootDir);
+            foreach ($filenames as $filename) {
+                if (intval($filename) > $id) {
+                    $id = intval($filename);
+                }
+            }
+        }
+
+        return $id + 1;
     }
 }
