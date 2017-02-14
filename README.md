@@ -88,5 +88,8 @@ The command will issue available URLs like:
 
 #### Swagger
 
-Swagger UI integration is in progress...
+Swagger UI with sandbox enabled is available under URL:
 
+    http://domain-name-serving.app/swagger
+
+> For example: http://127.0.0.1:8000/swagger

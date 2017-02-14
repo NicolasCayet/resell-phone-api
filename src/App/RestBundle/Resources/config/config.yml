@@ -5,7 +5,10 @@ parameters:
 fos_rest:
     param_fetcher_listener: true
     body_listener: true
-    format_listener: true
+    format_listener:
+        enabled: true
+        rules:
+            - { path: '^/', priorities: ['json', 'xml'], fallback_format: json, prefer_extension: false }
     view:
         view_response_listener: 'force'
         formats:
@@ -28,6 +31,3 @@ jms_serializer:
             AppCoreBundle:
                 namespace_prefix: "App\\CoreBundle"
                 path: "%serializer.path%/AppCoreBundle"
-
-# NelmioApiDocBundle configurations
-nelmio_api_doc: ~

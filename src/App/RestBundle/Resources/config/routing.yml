@@ -1,8 +1,4 @@
 app_rest_services:
     resource: "@AppRestBundle/Resources/config/routing_rest.yml"
+    defaults: {_format: json}
     type: rest
-
-NelmioApiDocBundle:
-    resource: "@NelmioApiDocBundle/Resources/config/routing.yml"
-    prefix: doc
-
